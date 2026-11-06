@@ -10,7 +10,7 @@ import { Spec, mx, mz } from '../core.js';
 import { baseWalls, baseFloors, buildShell, editWalls, W } from '../plan.js';
 import * as K from '../kit.js';
 import { titanicMats, vitrine } from '../titanic.js';
-import { mats, art, labels } from './common.js';
+import { mats, art, labels, cove } from './common.js';
 import { tileRoom } from './d1.js';
 
 const { FACE } = K;
@@ -26,24 +26,6 @@ export function walls() {
 
 export function floors() {
   return baseFloors().concat([{ id: 'p12gap', r: [640, 413, 648, 688], room: 'master' }]);
-}
-
-// Cove lighting: a 0.3 m bulkhead round the room, 0.18 m deep, with a warm
-// glow washing the recessed ceiling just inside it.
-function cove(S, [x1, y1, x2, y2], o = {}) {
-  const w = o.w ?? 0.3, top = 2.65, by = top - 0.18;
-  const X1 = mx(x1), X2 = mx(x2), Z1 = mz(y1), Z2 = mz(y2);
-  S.onLayer(1, () => {
-    S.bb('ceil', X1, by, Z1, X2, top, Z1 + w);
-    S.bb('ceil', X1, by, Z2 - w, X2, top, Z2);
-    S.bb('ceil', X1, by, Z1 + w, X1 + w, top, Z2 - w);
-    S.bb('ceil', X2 - w, by, Z1 + w, X2, top, Z2 - w);
-    const g = 0.1, y = top - 0.004;
-    S.bb('coveGlow', X1 + w, y, Z1 + w, X2 - w, top - 0.002, Z1 + w + g);
-    S.bb('coveGlow', X1 + w, y, Z2 - w - g, X2 - w, top - 0.002, Z2 - w);
-    S.bb('coveGlow', X1 + w, y, Z1 + w + g, X1 + w + g, top - 0.002, Z2 - w - g);
-    S.bb('coveGlow', X2 - w - g, y, Z1 + w + g, X2 - w, top - 0.002, Z2 - w - g);
-  });
 }
 
 // Wall-hung cat house: a box with a round doorway.

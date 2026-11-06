@@ -1,6 +1,6 @@
 # Our Home
 
-A walkable 3D mock-up of our Bayshore Oasis 4-room flat (90 m²), in four designs, with the LEGO Titanic (10294) as the centrepiece of each.
+A walkable 3D mock-up of our Bayshore Oasis 4-room flat (90 m²), in five designs, with the LEGO Titanic (10294) as the centrepiece of each.
 
 | | Design | Layout |
 |---|---|---|
@@ -8,6 +8,7 @@ A walkable 3D mock-up of our Bayshore Oasis 4-room flat (90 m²), in four design
 | 2 | **White Star**: 1912 ocean-liner deco; bookcase door into The Bridge mancave; the Titanic in a glass opening seen from two rooms | Bedroom 2 merged into the master, bigger master bath with a tub, bedroom 3 becomes the mancave |
 | 3 | **Summer Triangle**: star ceilings, a teak stargazing deck, the Titanic on its own island, yakiniku table | Bedroom 3 removed, bedroom 2 behind glass |
 | 4 | **Shoreline**: calm sandy beach house; the Titanic at the front door; island instead of a dining table; TV wall with surround sound and a cat playground; cove lighting | Master and bedroom 2 merged into one room to sleep, work and pray; bathrooms untouched; bedroom 3 kept for a future child |
+| 5 | **Bayshore Residence**: warm coastal Japandi; an oak foyer wall that takes in the shelter; the Titanic in a sealed museum case between living and dining; kitchen behind slim glass sliders; paper lanterns and cove light | Exactly as built: bedroom 2 is a tech room with a guest daybed, bedroom 3 is Nurul's dressing and prayer room |
 
 Live: **https://seaboiii.github.io/our_home/** (GitHub Pages serves this folder as it is; there is no build step).
 
@@ -17,13 +18,13 @@ Live: **https://seaboiii.github.io/our_home/** (GitHub Pages serves this folder 
 python tools/serve.py
 ```
 
-Open http://127.0.0.1:8765. Click to look around, `W A S D` to walk, `Shift` to run, `F` to use the secret bookcase in design 2, `N` for night, `1` to `4` to switch designs, **Dollhouse** for the overview. On a phone: left thumbstick to walk, drag to look.
+Open http://127.0.0.1:8765. Click to look around, `W A S D` to walk, `Shift` to run, `F` to use the secret bookcase in design 2, `N` for night, `1` to `5` to switch designs, **Dollhouse** for the overview. On a phone: left thumbstick to walk, drag to look.
 
 ## Blender
 
 The same scene description drives Blender, so the renders match the walkthrough.
 
-1. `node tools/export.mjs` writes `build/d1.json` to `d4.json`.
+1. `node tools/export.mjs` writes `build/d1.json` to `d5.json`.
 2. Canvas textures (wood, herringbone, art, the star ceiling) are exported from the running page into `build/tex/` (run `await __home.textures(i)` in the browser console; `tools/serve.py` accepts them at `/tex`).
 3. Build and render:
 

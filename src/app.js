@@ -459,7 +459,7 @@ addEventListener('keydown', (e) => {
   if (e.code === 'KeyF' || e.code === 'KeyE') toggleInteractive();
   if (e.code === 'KeyN') { state.night = !state.night; applyLighting(); }
   if (e.code === 'KeyM') setMode(state.mode === 'walk' ? 'orbit' : 'walk');
-  if (['Digit1', 'Digit2', 'Digit3', 'Digit4'].includes(e.code)) selectDesign(+e.code.slice(5) - 1);
+  if (['Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5'].includes(e.code)) selectDesign(+e.code.slice(5) - 1);
   if (e.code.startsWith('Arrow') || e.code === 'Space') e.preventDefault();
 });
 addEventListener('keyup', (e) => { state.keys[e.code] = false; });

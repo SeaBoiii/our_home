@@ -247,6 +247,9 @@ def build(spec, design, night):
             geo = panel(it)
         else:
             continue
+        sc = it.get('sc')
+        if sc and k != 'sph':  # spheres apply their own scale
+            geo = ([(v[0] * sc[0], v[1] * sc[1], v[2] * sc[2]) for v in geo[0]],) + tuple(geo[1:])
         key = (it['m'], it.get('L', 0), it.get('g', ''))
         buckets.setdefault(key, Bucket()).add(*geo, TO_BLENDER @ mat_of(it))
 

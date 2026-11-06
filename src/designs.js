@@ -2,6 +2,7 @@ import { build as fieldNotes } from './designs/d1.js';
 import { build as whiteStar } from './designs/d2.js';
 import { build as summerTriangle } from './designs/d3.js';
 import { build as shoreline } from './designs/d4.js';
+import { build as bayshoreResidence } from './designs/d5.js';
 
 export const DESIGNS = [
   {
@@ -72,5 +73,22 @@ export const DESIGNS = [
     ],
     note: 'Only one partition comes down, so this needs an HDB permit but no wet-area work. The Titanic sits in the foyer, which has no window, so the LEGO stays out of direct sun and will not fade. The surround setup is a soundbar, two front speakers, a subwoofer in the console and four in-ceiling speakers. Cove lighting runs round every room except the kitchen and bathrooms. The prayer space assumes the top of the plan faces north; check the qibla on site.',
     build: shoreline,
+  },
+  {
+    id: 'bayshore-residence',
+    name: 'Bayshore Residence',
+    short: 'Warm coastal Japandi',
+    eyebrow: 'Design 5 · Your vision, original layout',
+    accent: '#9aaa8c',
+    sun: [-0.4, 0.55, -0.9],
+    sunColor: '#ffefd6',
+    lede: 'A quiet boutique seaside resort in the morning and a cosy sanctuary at night. Cream walls, light oak, textured off-white fabrics, a little sage and just enough sea-glass blue. The layout stays as built; the luxury is in proportion, joinery and light: a continuous oak wall at the door that takes in the shelter, a sealed museum case for the Titanic between living and dining, and a kitchen behind slim glass sliders.',
+    palette: [['Warm ivory', '#f3ede3'], ['Sand', '#e2d3bc'], ['Natural oak', '#c8a27a'], ['Sage', '#9aaa8c'], ['Sea glass', '#8fa9a8'], ['Warm stone', '#e6dacb']],
+    changes: [
+      'No walls come down. The Oasis plan already leaves the kitchen open to the dining area, so the sliding glass panels fill that opening without hacking.',
+      'The shelter door keeps its own leaf, swing, ventilation and HDB notice; only its finish is matched to the oak, pending HDB approval.',
+    ],
+    note: 'Check on site: which way the living window faces (the Titanic case is placed away from it), and that the king bed leaves enough clearance. Wi-Fi access points sit on the corridor and bedroom 2 ceilings, never inside the shelter. Lighting scenes (Morning, Movie Night, Good Night) run alongside ordinary wall switches. Bedroom 3 uses loose furniture, so it can become a nursery later. The prayer space assumes the top of the plan faces north.',
+    build: bayshoreResidence,
   },
 ];
