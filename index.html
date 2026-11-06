@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Our Home</title>
+<meta name="description" content="Walk through four 3D designs for Aleem and Nurul's Bayshore Oasis 4-room flat, with the LEGO Titanic at the heart of each.">
+<meta property="og:title" content="Our Home">
+<meta property="og:description" content="Four walkable 3D designs for our Bayshore Oasis 4-room flat.">
+<meta property="og:image" content="https://seaboiii.github.io/our_home/renders/d4_v0.jpg">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#04121b">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+  /* Layout: a full-bleed 3D walkthrough with a quiet chrome of midnight glass
+     and champagne gold, the couple's own wedding palette. Single dark world. */
+  :root {
+    --ink: #04121b;
+    --panel: rgba(4, 18, 27, 0.8);
+    --panel-solid: #071a25;
+    --line: rgba(217, 180, 114, 0.24);
+    --gold: #d9b472;
+    --ivory: #f8f3ea;
+    --muted: #a8b5bb;
+    --teal: #033a4e;
+    --theme: #d9b472;
+    --mm-floor: rgba(248, 243, 234, 0.16);
+    --mm-wall: rgba(248, 243, 234, 0.85);
+    --display: "Instrument Serif", Georgia, "Times New Roman", serif;
+    --body: "Instrument Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+    color-scheme: dark;
+  }
+  [hidden] { display: none !important; }
+  html, body { height: 100%; }
+  body {
+    margin: 0; overflow: hidden; background: var(--ink); color: var(--ivory);
+    font: 14px/1.45 var(--body); -webkit-font-smoothing: antialiased;
+  }
+  #scene { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; outline: none; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .glass { background: var(--panel); backdrop-filter: blur(14px) saturate(1.2); -webkit-backdrop-filter: blur(14px) saturate(1.2); border: 1px solid var(--line); }
+
+  /* brand + tabs */
+  #top {
+    position: fixed; z-index: 5; top: calc(env(safe-area-inset-top, 0px) + 14px);
+    left: max(16px, env(safe-area-inset-left, 0px)); display: flex; flex-direction: column; gap: 10px; max-width: min(640px, calc(100vw - 32px));
+    pointer-events: none;
+  }
+  #top > * { pointer-events: auto; }
+  .brand { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; text-shadow: 0 1px 12px rgba(0,0,0,0.5); }
+  .brand h1 { margin: 0; font: 400 34px/1 var(--display); letter-spacing: 0.01em; }
+  .brand h1 em { color: var(--gold); font-style: italic; }
+  .brand .meta { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  #tabs { display: flex; gap: 6px; padding: 5px; border-radius: 14px; width: fit-content; max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+  .design-tab {
+    display: flex; align-items: center; gap: 10px; padding: 7px 14px 7px 8px; border: 0; border-radius: 10px;
+    background: transparent; text-align: left; white-space: nowrap; transition: background 0.2s;
+  }
+  .design-tab:hover { background: rgba(248, 243, 234, 0.06); }
+  .design-tab[aria-selected="true"] { background: rgba(217, 180, 114, 0.16); }
+  .tab-num {
+    width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; flex: none;
+    font: 600 12px/1 var(--mono); border: 1px solid var(--line); color: var(--muted);
+  }
+  .design-tab[aria-selected="true"] .tab-num { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+  .tab-text { display: flex; flex-direction: column; }
+  .tab-name { font: 400 18px/1.1 var(--display); }
+  .tab-sub { font-size: 11px; color: var(--muted); }
+
+  /* info panel */
+  #info {
+    position: fixed; z-index: 4; top: calc(env(safe-area-inset-top, 0px) + 14px); right: max(16px, env(safe-area-inset-right, 0px));
+    width: 340px; max-height: calc(100% - 230px); overflow: auto; border-radius: 16px; padding: 20px 20px 18px;
+    display: flex; flex-direction: column; gap: 14px; scrollbar-width: thin; transition: transform 0.35s, opacity 0.35s;
+  }
+  body:not(.info-open) #info { transform: translateX(calc(100% + 24px)); opacity: 0; pointer-events: none; }
+  #info .eyebrow { font: 500 11px/1.3 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin: 0; }
+  #info h2 { margin: -6px 0 0; font: 400 38px/1.05 var(--display); text-wrap: balance; }
+  #info p { margin: 0; color: #d9dcd6; }
+  #info h3 { margin: 4px 0 0; font: 600 11px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  #swatches { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px; }
+  #swatches li { display: flex; align-items: center; gap: 8px; font-size: 12.5px; min-width: 0; }
+  .chip { width: 18px; height: 18px; border-radius: 50%; flex: none; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.18); }
+  #tour { display: flex; flex-direction: column; gap: 4px; }
+  .stop {
+    display: flex; flex-direction: column; gap: 1px; text-align: left; padding: 8px 10px; border-radius: 10px;
+    border: 1px solid transparent; background: rgba(248, 243, 234, 0.04);
+  }
+  .stop:hover { border-color: var(--line); background: rgba(217, 180, 114, 0.08); }
+  .stop-name { font-weight: 500; }
+  .stop-note { font-size: 12px; color: var(--muted); }
+  #changes { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 5px; color: #d9dcd6; }
+  #hdb-note { font-size: 12.5px; color: var(--muted) !important; border-top: 1px solid var(--line); padding-top: 12px; }
+
+  /* bottom controls */
+  #controls {
+    position: fixed; z-index: 5; left: max(16px, env(safe-area-inset-left, 0px)); bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+    display: flex; gap: 6px; padding: 5px; border-radius: 14px; flex-wrap: wrap; max-width: calc(100vw - 32px);
+  }
+  .ctl { border: 0; border-radius: 9px; padding: 8px 12px; background: transparent; font-size: 13px; font-weight: 500; white-space: nowrap; }
+  .ctl:hover { background: rgba(248, 243, 234, 0.07); }
+  .ctl[aria-pressed="true"] { background: var(--gold); color: var(--ink); }
+  .sep { width: 1px; background: var(--line); margin: 4px 2px; }
+  #btn-info { display: inline-flex; align-items: center; gap: 6px; }
+
+  #hint {
+    position: fixed; z-index: 3; left: 50%; transform: translateX(-50%); bottom: calc(env(safe-area-inset-bottom, 0px) + 22px);
+    padding: 7px 14px; border-radius: 999px; font-size: 12px; color: var(--muted); white-space: nowrap; pointer-events: none;
+  }
+  #hint kbd { font: 600 11px/1 var(--mono); color: var(--ivory); border: 1px solid var(--line); border-radius: 4px; padding: 2px 5px; }
+  body.locked #hint, body[data-mode="orbit"] #hint .walk-only, body.touch #hint { display: none; }
+  body[data-mode="walk"] #hint .orbit-only { display: none; }
+
+  #minimap-wrap { position: fixed; z-index: 4; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(env(safe-area-inset-bottom, 0px) + 16px); border-radius: 14px; padding: 8px; }
+  #minimap { display: block; width: 220px; height: 150px; cursor: crosshair; }
+  .mm-cap { font: 500 10px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 2px 2px 6px; display: flex; justify-content: space-between; }
+
+  #crosshair { position: fixed; z-index: 3; left: 50%; top: 50%; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: rgba(248,243,234,0.8); box-shadow: 0 0 0 2px rgba(0,0,0,0.25); display: none; pointer-events: none; }
+  body.locked #crosshair { display: block; }
+
+  #prompt { position: fixed; z-index: 6; left: 50%; top: 58%; transform: translateX(-50%); padding: 10px 16px; border-radius: 12px; display: flex; gap: 10px; align-items: center; font-weight: 500; }
+  #prompt kbd { font: 600 12px/1 var(--mono); background: var(--gold); color: var(--ink); border-radius: 6px; padding: 5px 8px; }
+  body.touch #prompt kbd { display: none; }
+  #btn-act { position: fixed; z-index: 6; right: max(24px, env(safe-area-inset-right, 0px)); bottom: calc(env(safe-area-inset-bottom, 0px) + 200px); width: 72px; height: 72px; border-radius: 50%; border: 0; background: var(--gold); color: var(--ink); font-weight: 600; }
+
+  #joy { position: fixed; z-index: 5; left: max(28px, env(safe-area-inset-left, 0px)); bottom: calc(env(safe-area-inset-bottom, 0px) + 92px); width: 120px; height: 120px; border-radius: 50%; display: none; touch-action: none; }
+  #joy-knob { position: absolute; left: 50%; top: 50%; width: 48px; height: 48px; margin: -24px 0 0 -24px; border-radius: 50%; background: rgba(217,180,114,0.85); }
+  body.touch[data-mode="walk"] #joy { display: block; }
+
+  #labels { position: fixed; inset: 0; pointer-events: none; z-index: 2; }
+  .room-label {
+    position: absolute; left: 0; top: 0; padding: 3px 9px; border-radius: 999px; white-space: nowrap;
+    background: rgba(4, 18, 27, 0.72); border: 1px solid var(--line); font: 500 12px/1.3 var(--body); color: var(--ivory);
+  }
+
+  #loading { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; background: rgba(4,18,27,0.6); }
+  #loading div { font: italic 400 28px/1 var(--display); color: var(--gold); }
+
+  #gallery {
+    position: fixed; inset: 0; z-index: 20; background: rgba(4, 18, 27, 0.94); overflow: auto;
+    padding: calc(env(safe-area-inset-top, 0px) + 20px) max(16px, env(safe-area-inset-right, 0px)) calc(env(safe-area-inset-bottom, 0px) + 24px) max(16px, env(safe-area-inset-left, 0px));
+    display: flex; flex-direction: column; gap: 18px;
+  }
+  .gallery-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; max-width: 1400px; width: 100%; margin: 0 auto; }
+  .gallery-head .eyebrow { margin: 0 0 4px; font: 500 11px/1.3 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); }
+  .gallery-head h2 { margin: 0; font: 400 36px/1.05 var(--display); }
+  #gallery-close { border: 1px solid var(--line); }
+  #gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 14px; max-width: 1400px; width: 100%; margin: 0 auto; }
+  .shot { border: 0; padding: 0; background: none; text-align: left; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .shot img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 10px; display: block; background: var(--panel-solid); border: 1px solid var(--line); }
+  .shot span { font-size: 13px; color: #d9dcd6; }
+  .shot:hover img { border-color: var(--gold); }
+  #lightbox { position: fixed; inset: 0; margin: 0; z-index: 21; background: rgba(2, 9, 14, 0.97); display: grid; place-items: center; padding: 56px max(16px, env(safe-area-inset-right, 0px)) 56px max(16px, env(safe-area-inset-left, 0px)); }
+  #lightbox img { max-width: 100%; max-height: calc(100% - 40px); border-radius: 8px; }
+  #lightbox figcaption { color: var(--ivory); font: 400 20px/1.2 var(--display); }
+  .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); font-size: 28px; background: var(--panel); border: 1px solid var(--line); width: 48px; height: 48px; padding: 0; }
+  #lb-prev { left: max(12px, env(safe-area-inset-left, 0px)); }
+  #lb-next { right: max(12px, env(safe-area-inset-right, 0px)); }
+  @media (max-width: 1180px) { #hint { display: none; } }
+  @media (max-width: 760px) {
+    .brand h1 { font-size: 26px; }
+    .brand .meta { display: none; }
+    .tab-sub { display: none; }
+    .tab-name { font-size: 15px; }
+    #info { top: auto; bottom: calc(env(safe-area-inset-bottom, 0px) + 70px); left: max(12px, env(safe-area-inset-left, 0px)); right: max(12px, env(safe-area-inset-right, 0px)); width: auto; max-height: 55%; }
+    body:not(.info-open) #info { transform: translateY(calc(100% + 90px)); }
+    #minimap-wrap { top: calc(env(safe-area-inset-top, 0px) + 112px); bottom: auto; padding: 6px; }
+    #minimap { width: 132px; height: 90px; }
+    .mm-cap { display: none; }
+    #hint { display: none; }
+    .ctl { padding: 8px 9px; font-size: 12px; }
+  }
+  @media (prefers-reduced-motion: reduce) { #info { transition: none; } }
+</style>
+<script type="importmap">
+  { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  } }
+</script>
+</head>
+<body>
+
+<canvas id="scene" tabindex="0" aria-label="3D walkthrough of the flat"></canvas>
+<div id="labels" hidden></div>
+<div id="crosshair"></div>
+
+<header id="top">
+  <div class="brand">
+    <h1>Our <em>Home</em></h1>
+    <span class="meta">Bayshore Oasis · 4-room · 90 m²</span>
+  </div>
+  <nav id="tabs" class="glass" role="tablist" aria-label="Designs"></nav>
+</header>
+
+<aside id="info" class="glass" aria-label="About this design">
+  <p class="eyebrow" id="info-eyebrow"></p>
+  <h2 id="info-title"></h2>
+  <p id="info-lede"></p>
+  <h3>Palette</h3>
+  <ul id="swatches"></ul>
+  <h3>Walk the tour</h3>
+  <div id="tour"></div>
+  <div id="changes-wrap">
+    <h3>Wall changes</h3>
+    <ul id="changes"></ul>
+  </div>
+  <p id="hdb-note"></p>
+</aside>
+
+<div id="controls" class="glass">
+  <button class="ctl" id="btn-walk" aria-pressed="true">Walk</button>
+  <button class="ctl" id="btn-house" aria-pressed="false">Dollhouse</button>
+  <button class="ctl" id="btn-cut" aria-pressed="true" hidden>Cut walls</button>
+  <span class="sep"></span>
+  <button class="ctl" id="btn-night" aria-pressed="false">Day</button>
+  <button class="ctl" id="btn-quality">High detail</button>
+  <span class="sep"></span>
+  <button class="ctl" id="btn-renders">Renders</button>
+  <button class="ctl" id="btn-info" aria-expanded="true">About</button>
+</div>
+
+<div id="gallery" hidden role="dialog" aria-modal="true" aria-labelledby="gallery-title">
+  <div class="gallery-head">
+    <div>
+      <p class="eyebrow">Rendered in Blender · Cycles</p>
+      <h2 id="gallery-title"></h2>
+    </div>
+    <button class="ctl" id="gallery-close">Close</button>
+  </div>
+  <div id="gallery-grid"></div>
+  <figure id="lightbox" hidden>
+    <img id="lightbox-img" alt="">
+    <figcaption id="lightbox-cap"></figcaption>
+    <button class="ctl lb-nav" id="lb-prev" aria-label="Previous render">‹</button>
+    <button class="ctl lb-nav" id="lb-next" aria-label="Next render">›</button>
+  </figure>
+</div>
+
+<div id="hint" class="glass">
+  <span class="walk-only">Click to look · <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> walk · <kbd>Shift</kbd> run · <kbd>N</kbd> night · <kbd>1</kbd>–<kbd>4</kbd> designs</span>
+  <span class="orbit-only">Drag to orbit · scroll to zoom · click the map to walk in</span>
+</div>
+
+<div id="minimap-wrap" class="glass">
+  <div class="mm-cap"><span>Plan</span><span>tap to go</span></div>
+  <canvas id="minimap" aria-label="Floor plan; click to walk there"></canvas>
+</div>
+
+<div id="prompt" class="glass" hidden><kbd>F</kbd><span id="prompt-text"></span></div>
+<button id="btn-act" hidden>Open</button>
+<div id="joy" class="glass"><div id="joy-knob"></div></div>
+<div id="loading"><div>Setting the table…</div></div>
+
+<script type="module">
+  document.body.classList.add('info-open');
+  if (matchMedia('(max-width: 760px)').matches) document.body.classList.remove('info-open');
+  Promise.race([
+    Promise.all([
+      document.fonts.load('40px "Instrument Serif"'), document.fonts.load('20px "Instrument Sans"'), document.fonts.load('20px "IBM Plex Mono"'),
+    ]),
+    new Promise((r) => setTimeout(r, 2500)),
+  ]).finally(() => import('./src/app.js').catch((e) => {
+    document.querySelector('#loading div').textContent = 'The 3D view could not start: ' + e.message;
+  }));
+</script>
+</body>
+</html>

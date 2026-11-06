@@ -1,0 +1,76 @@
+import { build as fieldNotes } from './designs/d1.js';
+import { build as whiteStar } from './designs/d2.js';
+import { build as summerTriangle } from './designs/d3.js';
+import { build as shoreline } from './designs/d4.js';
+
+export const DESIGNS = [
+  {
+    id: 'field-notes',
+    name: 'Field Notes',
+    short: 'Original layout',
+    eyebrow: 'Design 1 · Original layout, no hacking',
+    accent: '#d9b472',
+    sun: [-0.45, 0.7, -0.95],
+    lede: 'Every wall stays where HDB put it. Warm ivory, light oak and the forest green of the Field Notes look, with your wedding teal-navy and champagne gold saved for one thing: the Titanic, in a lit glass case on a navy console that faces the front door.',
+    palette: [['Warm ivory', '#f3eee4'], ['Light oak', '#c49a6c'], ['Forest green', '#173d35'], ['Teal-navy', '#033a4e'], ['Champagne gold', '#d9b472'], ['Sand', '#efe6d6']],
+    changes: [],
+    note: 'No wall works, so this is the cheapest and quickest to move into. Carpentry: Titanic console, TV batten wall, kitchen, fluted wardrobe, floating shoe cabinet. The prayer corner assumes the top of the plan faces north; check the qibla on site.',
+    build: fieldNotes,
+  },
+  {
+    id: 'white-star',
+    name: 'White Star',
+    short: 'Walls moved, secret Bridge',
+    eyebrow: 'Design 2 · Hacked walls',
+    accent: '#c9a25a',
+    sun: [-0.6, 0.6, -0.8],
+    lede: "A 1912 ocean liner, scaled to an HDB. Bedroom 2 folds into the master as a dressing lounge, the master bath grows a freestanding tub, and bedroom 3 becomes The Bridge, reached through a bookcase in the dining room's walnut library. The Titanic sails in a glass opening between The Bridge and the lounge, so both rooms see it.",
+    palette: [['Walnut', '#5a3a25'], ['Teal-navy velvet', '#0b3a4c'], ['Brass', '#c9a25a'], ['Liner ivory', '#efe8da'], ['Checker marble', '#16181a'], ['Blush (hers)', '#e9b7bf']],
+    changes: [
+      "Wall between the master and bedroom 2 removed; bedroom 2's corridor door sealed. The suite is about 6 m wide.",
+      'Master bath extends into the old wardrobe corner (2.5 × 1.1 m) for a freestanding tub.',
+      "Bedroom 3's door becomes a bookcase door in a full-height library wall. Pull the red book.",
+      'The thin wall between bedroom 3 and the living room gets a 1.6 m glass opening for the Titanic.',
+    ],
+    note: 'Partition removal needs an HDB permit and an HDB-registered contractor. Extending a bathroom over a dry area is often refused because of waterproofing, so raise the tub extension with HDB first. The household shelter walls stay untouched. The TV moves into The Bridge, so the lounge is for talking, music and the ship.',
+    build: whiteStar,
+  },
+  {
+    id: 'summer-triangle',
+    name: 'Summer Triangle',
+    short: 'Go wild',
+    eyebrow: 'Design 3 · Imagination first',
+    accent: '#f4b6c2',
+    sun: [-0.85, 0.32, -0.55],
+    sunColor: '#ffd6a0',
+    lede: 'Altair and Vega, with Deneb as the bridge between them, on the ceilings. Bedroom 3 opens up into a raised teak stargazing deck, and the Titanic gets an island of its own on the line where that wall stood, sailing over a glowing sea past an iceberg it finally misses. Paper planes fly a gold dashed route from the departures board at the door, and dinner is yakiniku, like the first meeting.',
+    palette: [['Midnight', '#04121b'], ['Teal-navy', '#033a4e'], ['Champagne gold', '#d9b472'], ['Blush', '#f4b6c2'], ['Kallang amber', '#f0b765'], ['Teak', '#9a6a3c']],
+    changes: [
+      'Bedroom 3 is taken down completely; its floor becomes a 30 cm raised teak deck open to the living room.',
+      "Bedroom 2's corridor wall becomes black-framed glass: the Player Two room.",
+      'The Titanic stands on The Crossing, a 2.3 m island where the old bedroom wall was.',
+      'Night-sky ceilings in the living room and master, with Vega, Altair and Deneb marked.',
+    ],
+    note: 'This one ignores budget and resale. Dropping to two bedrooms is allowed but hurts resale value, the raised deck and star ceilings are carpentry, and the glass wall needs an HDB permit like any partition change. The household shelter stays untouched.',
+    build: summerTriangle,
+  },
+  {
+    id: 'shoreline',
+    name: 'Shoreline',
+    short: 'Your brief: one big master',
+    eyebrow: 'Design 4 · Your brief',
+    accent: '#9db8b0',
+    sun: [-0.5, 0.65, -0.9],
+    sunColor: '#fff4e0',
+    lede: 'Bayshore is a few minutes from the sea, so the house takes its colours from the shore: limewashed walls, whitewashed oak, linen, rattan and sea-glass, with brushed brass for the small things. The master and bedroom 2 become one room to sleep, work and pray in. The Titanic greets you at the front door, and the living room is built around a big screen with surround sound and a cat playground above it.',
+    palette: [['Limewash', '#efe8dc'], ['Sand', '#dccbae'], ['Whitewashed oak', '#d9c6a6'], ['Sea-glass', '#9db8b0'], ['Travertine', '#e2d6c1'], ['Brushed brass', '#c9a25a']],
+    changes: [
+      "Wall between the master and bedroom 2 removed, and bedroom 2's corridor door sealed: one 6 m room with the bed, a desk for two, and room for two sejadah on the qibla line.",
+      'Both bathrooms stay exactly as built.',
+      'Fridge, oven and the robot vacuum dock all sit in the kitchen; the old fridge niche is left open for a plant.',
+      'Bedroom 3 stays a bedroom, ready for a child later.',
+    ],
+    note: 'Only one partition comes down, so this needs an HDB permit but no wet-area work. The Titanic sits in the foyer, which has no window, so the LEGO stays out of direct sun and will not fade. The surround setup is a soundbar, two front speakers, a subwoofer in the console and four in-ceiling speakers. Cove lighting runs round every room except the kitchen and bathrooms. The prayer space assumes the top of the plan faces north; check the qibla on site.',
+    build: shoreline,
+  },
+];

@@ -1,0 +1,9 @@
+# generated: scene specs, exported textures, artifact page
+build/
+# full-size Blender PNGs and local check shots; the page uses renders/*.jpg
+renders/png/
+renders/web/
+blender/*.blend1
+.claude/
+__pycache__/
+node_modules/
